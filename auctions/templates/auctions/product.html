@@ -1,0 +1,43 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+        <div id="product" class="border">
+            <div class="row col-lg-12">
+                <div class="col-lg-8" id="pro_img"><img src="{{product.photo}}" alt="{{ product.title }}"></div>  
+                <div class="col-lg-4 border">
+                    <h3>Bids :</h3>
+                    <ol>
+                        {% for bid in bids %}
+                            <li>{{ bid.user }} : {{ bid.price }} </li>
+                        {% endfor %}
+                    </ol>    
+                </div>
+            </div>
+            <div class="row"><h2>{{product.title}}</h2></div>
+            <div class="row"><h4>Rs.{{ product.price }}</h4></div>
+            <form action="{% url 'product' product.title %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="bid" placeholder="Enter your bid">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Bid">
+                </div>
+            </form>
+            <div>
+                <div class="row"><h3>Details</h3></div>
+                <ul>
+                    <li>User : {{ product.user }}</li>
+                    <li>Description : {{ product.desc }}</li>
+                    <li>Base Price : {{ product.base_price }}</li>
+                </ul>
+            </div>
+        </div>
+        <h3>Comments: </h3>
+        <ul>
+            {% for comm in comments %}
+                <li>{{comm.user}} : {{comm.comment}}</li>
+            {% endfor %}
+        </ul>
+{% endblock %}

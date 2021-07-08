@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for product in product %}
+        <div id="list" class="row border">
+            <div id="list_img">
+                <img src="{{product.photo}}" alt="{{ product.title }}">
+            </div>
+            <div id="list_content">
+                <h3>{{ product.title }}</h3>
+                <p>Rs.{{ product.price}}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
